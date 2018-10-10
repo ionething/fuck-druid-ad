@@ -64,4 +64,7 @@ public class FuckDruidAdConfiguration {
 1. 把这个文件放在自己的项目里，路径：src/main/resource/support/http/resources/js/common.js
 
 ## 说明
+
 **利益无关，纯属学习**
+
+Mail: vincent7xin@gmail.com
