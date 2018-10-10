@@ -1,13 +1,23 @@
-# fuck-druid-ad
-去掉druid监控页面的广告banner
+package com.github.ionething.druid.fuckdruidad.core;
 
-> druid 1.1.4版本之后加了直接到阿里云的footer广告banner，在 druid [issues2731](https://github.com/alibaba/druid/issues/2731#issuecomment-428277842)中提过一些想法去掉烦人的广告，这里做实践
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
+import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
+import com.alibaba.druid.util.Utils;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-## FuckDruidAdConfiguration（推荐）
+import javax.servlet.*;
+import java.io.IOException;
 
-Spring Boot项目中添加下面的configuration
-
-```java
+/**
+ * 去除druid监控页面烦人的广告
+ * @author Vincent
+ * @mail vincent7xin@gmail.com
+ */
 @Configuration
 @ConditionalOnWebApplication
 @AutoConfigureAfter(DruidDataSourceAutoConfigure.class)
@@ -52,16 +62,3 @@ public class FuckDruidAdConfiguration {
         return registrationBean;
     }
 }
-```
-
-- 原理很简单，就是使用过滤器过滤common.js的请求，重新处理后用正则替换相关的广告代码片段
-- 非 Spring Boot项目可以参照自己实现一个filter
-- 可以封装成一个starter，但不建议这么做
-
-## 使用干净的js
-
-1. 下载干净的[common.js](https://raw.githubusercontent.com/alibaba/druid/35ff7bafad6b5fdad6ed174e6bfbde8fa6396f46/src/main/resources/support/http/resources/js/common.js)
-1. 把这个文件放在自己的项目里，路径：src/main/resource/support/http/resources/js/common.js
-
-## 说明
-**利益无关，纯属学习**
