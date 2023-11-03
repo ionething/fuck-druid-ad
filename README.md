@@ -67,4 +67,3 @@ public class FuckDruidAdConfiguration {
 
 **利益无关，纯属学习**
 
-Mail: vincent7xin@gmail.com
